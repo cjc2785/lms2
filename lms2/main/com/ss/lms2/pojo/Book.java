@@ -4,14 +4,14 @@ public class Book {
 	
 	private int bookId;
 	private String title;
-	private int authId;
-	private int pubId;
+	private Author author;
+	private Publisher publisher;
 	
-	public Book(int bookId, String title, int authId, int pubId) {
+	public Book(int bookId, String title, Author author, Publisher publisher) {
 		this.bookId = bookId;
 		this.title = title;
-		this.authId = authId;
-		this.pubId = pubId;
+		this.author = author;
+		this.publisher = publisher;
 	}
 
 	public int getBookId() {
@@ -30,19 +30,19 @@ public class Book {
 		this.title = title;
 	}
 
-	public int getAuthId() {
-		return authId;
+	public Author getAuthor() {
+		return author;
 	}
 
-	public void setAuthId(int authId) {
-		this.authId = authId;
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 
-	public int getPubId() {
-		return pubId;
+	public Publisher getPublisher() {
+		return publisher;
 	}
 
-	public void setPubId(int pubId) {
-		this.pubId = pubId;
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
 	}
 }
