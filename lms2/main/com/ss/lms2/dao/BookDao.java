@@ -26,7 +26,7 @@ public class BookDao {
 	//Get all books that have copies remaining at the branch
 	public List<Book> getAvailable(LibraryBranch branch) throws SQLException {
 		
-		String query = "SELECT * FROM library.book b " +
+		String query = "SELECT * FROM library.tbl_book b " +
 				"JOIN tbl_author a ON a.authorId=b.authId " +
 				"JOIN tbl_publisher p ON p.publisherId=b.pubId " + 
 				"JOIN tbl_book_copies bc ON bc.bookId=b.bookId " +

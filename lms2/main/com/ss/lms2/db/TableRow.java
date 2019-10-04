@@ -1,5 +1,5 @@
 package com.ss.lms2.db;
-
+import java.time.LocalDate;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,10 +34,10 @@ public class TableRow {
 		}
 	}
 	
-	public Date getDate(String columnName) {
+	public LocalDate getDate(String columnName) {
 		
 		try {
-			return resultSet.getDate(columnName);
+			return resultSet.getDate(columnName).toLocalDate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

@@ -1,5 +1,6 @@
 package com.ss.lms2.db;
 
+import java.time.LocalDate;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 
@@ -31,9 +32,9 @@ public class QueryParameterList {
 		}
 	}
 	
-	public void setDate(int index, Date value) {
+	public void setDate(int index, LocalDate value) {
 		try {
-			statement.setDate(index, value);
+			statement.setDate(index, Date.valueOf(value));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
