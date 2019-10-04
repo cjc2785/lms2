@@ -44,7 +44,8 @@ public class BookLoanDao {
 	}
 	
 	//Only updates the dateOut & dateIn
-	public void update(BookLoan loan) throws SQLException {
+	//If the loan already exists, update the loan. Otherwise, insert
+	public void save(BookLoan loan) throws SQLException {
 		
 		String query = "INSERT INTO library.tbl_book_loans " + 
 				"VALUES (?,?,?, ?,?) ";

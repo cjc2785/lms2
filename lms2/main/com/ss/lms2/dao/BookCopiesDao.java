@@ -2,21 +2,20 @@ package com.ss.lms2.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.ss.lms2.db.Db;
 import com.ss.lms2.db.TableRow;
 import com.ss.lms2.pojo.LibraryBranch;
-import com.ss.lms2.pojo.Book;
-import com.ss.lms2.pojo.BookCopies;
-import com.ss.lms2.pojo.Author;
-import com.ss.lms2.pojo.Publisher;;
+import com.ss.lms2.pojo.*;
 
 public class BookCopiesDao {
 
 	private Db db;
 	
 	//Get all books that have copies remaining at the branch
-	public List<BookCopies> getInLibrary(LibraryBranch branch) throws SQLException {
+	public List<BookCopies> get(LibraryBranch branch) throws SQLException {
 		
 		String query = "SELECT b.*, a.*, lb.*, COALESCE(bc.noOfCopies, 0) FROM library.tbl_book b " +
 				"JOIN library.tbl_author a ON a.authorId=b.authId " +
@@ -30,6 +29,17 @@ public class BookCopiesDao {
 		});
 	}
 	
+	public Optional<BookCopies> get(LibraryBranch branch, Book book) throws SQLException {
+		
+		List<BookCopies> libraryCopies =  get(branch).stream()
+				.filter(copies -> copies.getBook().getBookId() == book.getBookId())
+				.collect(Collectors.toList());
+		
+		return libraryCopies.isEmpty() ? 
+				Optional.empty() :
+				Optional.of(libraryCopies.get(0));
+	}
+
 	
 	/*
 	 * Only updates the noOfCopies
