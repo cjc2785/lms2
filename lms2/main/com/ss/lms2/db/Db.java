@@ -11,8 +11,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /*
- * Db is a Singleton. The first time Db.getConnection(),
- * 	A new connection is created. Subsequent calls will
+ * Db is a Singleton. The first time Db.getConnection() 
+ * 	is called, a new connection is created. Subsequent calls will
  * 	return the same connection
  */
 
