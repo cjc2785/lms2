@@ -17,4 +17,8 @@ public class BookService {
 	public List<Book> getAll() throws SQLException {
 		return bookDao.getAll();
 	}
+	
+	public List<Book> getAvailable(LibraryBranch branch) throws SQLException {
+		return bookDao.getAvailable(branch);
+	}
 }

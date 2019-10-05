@@ -1,6 +1,7 @@
 package com.ss.lms2.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.ss.lms2.dao.*;
 import com.ss.lms2.pojo.*;
@@ -9,6 +10,10 @@ public class BookLoanService {
 
 	private BookLoanDao loanDao;
 	private BookCopiesDao copiesDao;
+	
+	public List<BookLoan> getByBorrower(Borrower borrower, LibraryBranch branch) throws SQLException {
+		return this.loanDao.getByBorrower(borrower, branch);
+	}
 	
 	//Also decrements the noOfCopies 
 	//Will decrement even if the loan exists

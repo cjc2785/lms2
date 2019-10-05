@@ -12,7 +12,7 @@ import com.ss.lms2.pojo.Borrower;
 import com.ss.lms2.pojo.LibraryBranch;
 import com.ss.lms2.pojo.Book;
 import com.ss.lms2.pojo.Author;
-import com.ss.lms2.pojo.Publisher;;
+import com.ss.lms2.pojo.Publisher;
 
 public class BookLoanDao {
 
