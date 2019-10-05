@@ -10,6 +10,16 @@ public class LibraryBranchDao {
 
 	private Db db;
 	
+	private static LibraryBranchDao dao = new LibraryBranchDao(Db.getConnection());
+	
+	public static LibraryBranchDao getDao() {
+		return dao;
+	}
+	
+	public LibraryBranchDao(Db db) {
+		this.db = db;
+	}
+	
 	
 	public List<LibraryBranch> getAll() throws SQLException {
 		String query = "SELECT * FROM library.tbl_library_branch";
@@ -20,7 +30,8 @@ public class LibraryBranchDao {
 			return new LibraryBranch(branchId, branchName, branchAddress);
 		});
 	}
-	
+
+
 	public void update(LibraryBranch branch) throws SQLException {
 		
 		String query = "UPDATE library.tbl_library_branch SET " + 

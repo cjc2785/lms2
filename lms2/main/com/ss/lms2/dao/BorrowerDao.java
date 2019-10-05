@@ -12,7 +12,16 @@ public class BorrowerDao {
 
 	private Db db;
 	
+	private static BorrowerDao dao = new BorrowerDao(Db.getConnection());
 	
+	public static BorrowerDao getDao() {
+		return dao;
+	}
+	
+	public BorrowerDao(Db db) {
+		this.db = db;
+	}
+
 	public Optional<Borrower> get(int cardNo) throws SQLException {
 		
 		String query = "SELECT * FROM library.tbl_borrower bor " + 

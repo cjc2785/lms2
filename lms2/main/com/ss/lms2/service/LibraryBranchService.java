@@ -11,14 +11,26 @@ import java.util.stream.Collectors;
 import com.ss.lms2.dao.*;
 import com.ss.lms2.pojo.*;
 
-
-
 public class LibraryBranchService {
 
 	private LibraryBranchDao branchDao;
 	private BookLoanDao loanDao;
 	
 	
+	private static LibraryBranchService service = new LibraryBranchService(
+			LibraryBranchDao.getDao(),
+			BookLoanDao.getDao()
+			);
+	
+	public static LibraryBranchService getService() {
+		return service;
+	}
+	
+	private LibraryBranchService(LibraryBranchDao branchDao, BookLoanDao loanDao) {
+		this.branchDao = branchDao;
+		this.loanDao = loanDao;
+	}
+
 	//Utility function that can be passed to a filter
 	static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         Map<Object,Boolean> visited = new HashMap<>();

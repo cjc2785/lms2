@@ -11,6 +11,22 @@ public class BookLoanService {
 	private BookLoanDao loanDao;
 	private BookCopiesDao copiesDao;
 	
+	private static BookLoanService service = new BookLoanService(
+			BookLoanDao.getDao(),
+			BookCopiesDao.getDao()
+			);
+	
+	public static BookLoanService getService() {
+		return service;
+	}
+	
+	private BookLoanService(BookLoanDao loanDao, BookCopiesDao copiesDao) {
+		this.loanDao = loanDao;
+		this.copiesDao = copiesDao;
+	}
+	
+	
+
 	public List<BookLoan> getByBorrower(Borrower borrower, LibraryBranch branch) throws SQLException {
 		return this.loanDao.getByBorrower(borrower, branch);
 	}

@@ -14,7 +14,16 @@ public class BookDao {
 
 	private Db db;
 	
+	private static BookDao dao = new BookDao(Db.getConnection());
 	
+	public static BookDao getDao() {
+		return dao;
+	}
+	
+	private BookDao(Db db) {
+		this.db = db;
+	}
+
 	public List<Book> getAll() throws SQLException {
 		String query = "SELECT * FROM library.book b " +
 				"JOIN tbl_author a ON a.authorId=b.authId " +

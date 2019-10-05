@@ -18,6 +18,16 @@ public class BookLoanDao {
 
 	private Db db;
 	
+	private static BookLoanDao dao = new BookLoanDao(Db.getConnection());
+	
+	public static BookLoanDao getDao() {
+		return dao;
+	}
+	
+	public BookLoanDao(Db db) {
+		this.db = db;
+	}
+
 	//Get all books that have copies remaining at the branch
 	public List<BookLoan> getByBorrower(Borrower borrower) throws SQLException {
 		

@@ -14,6 +14,16 @@ public class BookCopiesDao {
 
 	private Db db;
 	
+	private static BookCopiesDao dao = new BookCopiesDao(Db.getConnection());
+	
+	public static BookCopiesDao getDao() {
+		return dao;
+	}
+	
+	public BookCopiesDao(Db db) {
+		this.db = db;
+	}
+
 	//Get all books that have copies remaining at the branch
 	public List<BookCopies> get(LibraryBranch branch) throws SQLException {
 		
