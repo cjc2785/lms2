@@ -35,7 +35,7 @@ class LibraryBranchServiceTest {
 	void updateShouldChangeTheBranchName() throws SQLException {
 		
 		LibraryBranch branch = new LibraryBranch(
-				3, "new chi", "1 chi ave");
+				3, "new dc", "1 dc ave");
 		
 		
 		service.update(branch);
@@ -43,7 +43,7 @@ class LibraryBranchServiceTest {
 		
 		String actual = service.get(3).get().getBranchName();
 		
-		assertEquals(actual, "new chi");
+		assertEquals(actual, "new dc");
 	}
 	
 	@Test

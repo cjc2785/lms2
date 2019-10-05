@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import com.ss.lms2.db.Db;
 
-public class TestUtils {
+class TestUtils {
 
 	//Deletes all rows in the db before populating
 	public static void populateTestDb() throws SQLException {
@@ -42,20 +42,22 @@ public class TestUtils {
 				+ "(5, 'spain', 1, 2)";
 
 		String copiesSql = "INSERT INTO library.tbl_book_copies "
-				+ "VALUES (1, 1, 1), "
-				+ "(1, 2, 1),"
+				+ "VALUES (5, 1, 1), "
+				+ "(5, 2, 1),"
 				+ "(1, 3, 1),"
-				+ "(1, 4, 1),"
 				+ "(2, 3, 0),"
 				+ "(3, 3, 3),"
-				+ "(3, 4, 3)";
+				+ "(4, 3, 3),"
+				+ "(1, 4, 1),"
+				+ "(3, 4, 3)"; 
 
 		String loansSql = "INSERT INTO library.tbl_book_loans " 
-				+ "VALUES (1, 1, 2, CURDATE(), CURDATE() + INTERVAL 1 WEEK),"
-				+ "(1, 2, 2, CURDATE(), CURDATE() + INTERVAL 1 WEEK),"
+				+ "VALUES (5, 1, 2, CURDATE(), CURDATE() + INTERVAL 1 WEEK),"
+				+ "(5, 2, 2, CURDATE(), CURDATE() + INTERVAL 1 WEEK),"
 				+ "(1, 3, 2, CURDATE(), CURDATE() + INTERVAL 1 WEEK),"
 				+ "(2, 3, 2, CURDATE(), CURDATE() + INTERVAL 1 WEEK),"
-				+ "(3, 3, 2, CURDATE(), CURDATE() + INTERVAL 1 WEEK)";
+				+ "(3, 3, 2, CURDATE(), CURDATE() + INTERVAL 1 WEEK),"
+				+ "(3, 3, 3, CURDATE(), CURDATE() + INTERVAL 1 WEEK)";
 
 		
 		//Delete all rows in the database 

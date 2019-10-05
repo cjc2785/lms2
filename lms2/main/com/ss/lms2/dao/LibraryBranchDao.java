@@ -38,7 +38,7 @@ public class LibraryBranchDao {
 				"WHERE branchId=?";
 
 
-		List<LibraryBranch> result = db.withQuery(
+		return db.withQueryOne(
 				query, 
 				row -> {
 					String branchName = row.getString("branchName");
@@ -48,8 +48,6 @@ public class LibraryBranchDao {
 				parameterList -> {
 					parameterList.setInt(1, branchId);
 				});
-
-		return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
 	}
 
 

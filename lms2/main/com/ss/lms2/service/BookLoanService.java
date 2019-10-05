@@ -2,6 +2,7 @@ package com.ss.lms2.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 import com.ss.lms2.dao.*;
 import com.ss.lms2.pojo.*;
@@ -28,7 +29,13 @@ public class BookLoanService {
 	
 
 	public List<BookLoan> getByBorrower(Borrower borrower, LibraryBranch branch) throws SQLException {
-		return this.loanDao.getByBorrower(borrower, branch);
+		return loanDao.getByBorrower(borrower, branch);
+	}
+	
+	public Optional<BookLoan> get(Borrower borrower, LibraryBranch branch, Book book) 
+		throws SQLException {
+		
+		return loanDao.get(borrower, branch, book);
 	}
 	
 	//Also decrements the noOfCopies 
@@ -42,7 +49,7 @@ public class BookLoanService {
 		copies.setNoOfCopies(copies.getNoOfCopies() - 1);
 		copiesDao.update(copies);
 		
-		loanDao.save(loan);
+		loanDao.insert(loan);
 	}
 	
 	//Also increments the noOfCopies 
@@ -56,6 +63,6 @@ public class BookLoanService {
 		copies.setNoOfCopies(copies.getNoOfCopies() + 1);
 		copiesDao.update(copies);
 		
-		loanDao.save(loan);
+		loanDao.delete(loan);
 	}
 }
