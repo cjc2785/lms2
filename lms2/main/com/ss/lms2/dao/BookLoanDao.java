@@ -28,15 +28,16 @@ public class BookLoanDao {
 		this.db = db;
 	}
 
-	//Get all books that have copies remaining at the branch
+	//Get all loans by the borrower
 	public List<BookLoan> getByBorrower(Borrower borrower) throws SQLException {
 		
-		String query = "SELECT b.*, a.*, lb.*, COALESCE(bc.noOfCopies, 0) FROM library.tbl_book b " +
+		String query = "SELECT * FROM library.tbl_book b " +
 				"JOIN library.tbl_author a ON a.authorId=b.authId " +
 				"JOIN library.tbl_publisher p ON p.publisherId=b.pubId " + 
 				"JOIN library.tbl_book_loans bl ON bl.bookId=b.bookId " + 
 				"JOIN library.tbl_library_branch lb ON lb.branchId=bl.branchId " +
-				"WHERE bl.cardNo=?";
+				"JOIN library.tbl_borrower bor ON bor.cardNo=bl.cardNo " +
+				"WHERE bor.cardNo=?";
 		
 		return db.withQuery(query, 
 				row -> rowToLoans(borrower, row),

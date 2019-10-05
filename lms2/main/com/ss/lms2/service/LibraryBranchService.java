@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -39,6 +40,10 @@ public class LibraryBranchService {
 	
 	public List<LibraryBranch> getAll() throws SQLException {
 		return branchDao.getAll();
+	}
+	
+	public Optional<LibraryBranch> get(int branchId) throws SQLException {
+		return branchDao.get(branchId);
 	}
 	
 	public void update(LibraryBranch branch) throws SQLException {
