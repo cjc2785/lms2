@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import com.ss.lms2.db.Db;
 
-class TestUtils {
+public class TestUtils {
 
 	//Deletes all rows in the db before populating
 	public static void populateTestDb() throws SQLException {

@@ -46,6 +46,7 @@ public class BookLoanDao {
 				});
 	}
 
+	//Get all loans by the borrower at the branch
 	public List<BookLoan> getByBorrower(Borrower borrower, LibraryBranch branch)
 			throws SQLException {
 
@@ -88,7 +89,7 @@ public class BookLoanDao {
 				});
 	}
 
-	//Only updates the dateOut & dateIn
+	//Will fail if the loan already exists
 	public void insert(BookLoan loan) throws SQLException {
 
 		String query = "INSERT INTO library.tbl_book_loans " + 
