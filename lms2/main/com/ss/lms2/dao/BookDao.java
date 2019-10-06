@@ -14,11 +14,20 @@ public class BookDao {
 
 	private Db db;
 	
+	private static BookDao dao = new BookDao(Db.getConnection());
 	
+	public static BookDao getDao() {
+		return dao;
+	}
+	
+	private BookDao(Db db) {
+		this.db = db;
+	}
+
 	public List<Book> getAll() throws SQLException {
-		String query = "SELECT * FROM library.book b " +
-				"JOIN tbl_author a ON a.authorId=b.authId " +
-				"JOIN tbl_publisher p ON p.publisherId=b.pubId";
+		String query = "SELECT * FROM library.tbl_book b " +
+				"JOIN library.tbl_author a ON a.authorId=b.authId " +
+				"JOIN library.tbl_publisher p ON p.publisherId=b.pubId";
 		
 		return db.withQuery(query, this::rowToBook);
 	}
@@ -27,10 +36,10 @@ public class BookDao {
 	public List<Book> getAvailable(LibraryBranch branch) throws SQLException {
 		
 		String query = "SELECT * FROM library.tbl_book b " +
-				"JOIN tbl_author a ON a.authorId=b.authId " +
-				"JOIN tbl_publisher p ON p.publisherId=b.pubId " + 
-				"JOIN tbl_book_copies bc ON bc.bookId=b.bookId " +
-				"JOIN tbl_library_branch lb ON lb.branchId=bc.branchId " +
+				"JOIN library.tbl_author a ON a.authorId=b.authId " +
+				"JOIN library.tbl_publisher p ON p.publisherId=b.pubId " + 
+				"JOIN library.tbl_book_copies bc ON bc.bookId=b.bookId " +
+				"JOIN library.tbl_library_branch lb ON lb.branchId=bc.branchId " +
 				"WHERE lb.branchId=? AND bc.noOfCopies > 0";
 		
 		return db.withQuery(query, this::rowToBook, parameterList -> {

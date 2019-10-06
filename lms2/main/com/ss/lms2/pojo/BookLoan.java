@@ -18,6 +18,13 @@ public class BookLoan {
 		this.dueDate = dueDate;
 	}
 
+	public BookLoan(Book book, LibraryBranch branch, Borrower borrower) {
+		this.book = book;
+		this.branch = branch;
+		this.borrower = borrower;
+		this.dateOut = null;
+		this.dueDate = null;
+	}
 	public Book getBook() {
 		return book;
 	}
