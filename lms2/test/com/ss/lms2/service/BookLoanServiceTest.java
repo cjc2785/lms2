@@ -117,6 +117,35 @@ class BookLoanServiceTest {
 	}
 	
 	@Test
+	void insertShouldBeIdempotent() throws SQLException {
+		
+		Borrower dan = new Borrower(
+				2, "dan", "1 dan street", "222-222-2222");
+		
+		LibraryBranch dc = new LibraryBranch(
+				3, "dc", "1 dc ave");
+		
+		Book canada = new Book(2, null, null, null);
+		
+		BookLoan existingLoan = new BookLoan(
+				canada,
+				dc, 
+				dan,
+				LocalDate.now(), 
+				LocalDate.now());
+		
+		
+		service.insertLoan(existingLoan);
+		
+		
+		int actual = copiesService.get(dc, canada)
+				.get()
+				.getNoOfCopies();
+		
+		assertEquals(0, actual);
+	}
+	
+	@Test
 	void deleteShouldRemoveALoan() throws SQLException {
 		
 		Borrower dan = new Borrower(
@@ -161,6 +190,36 @@ class BookLoanServiceTest {
 				LocalDate.now());
 		
 		
+		service.deleteLoan(loan);
+		
+		int actual = copiesService.get(dc, canada)
+				.get()
+				.getNoOfCopies();
+				
+				
+		assertEquals(1, actual);
+	}
+	
+	@Test
+	void deleteShouldBeIdempotent() throws SQLException {
+		
+		Borrower dan = new Borrower(
+				2, "dan", "1 dan street", "222-222-2222");
+		
+		LibraryBranch dc = new LibraryBranch(
+				3, "dc", "1 dc ave");
+		
+		Book canada = new Book(2, null, null, null);
+		
+		BookLoan loan = new BookLoan(
+				canada,
+				dc, 
+				dan,
+				LocalDate.now(), 
+				LocalDate.now());
+		
+		//Delete twice should be the same as once
+		service.deleteLoan(loan);
 		service.deleteLoan(loan);
 		
 		int actual = copiesService.get(dc, canada)

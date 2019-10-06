@@ -10,12 +10,17 @@ import com.ss.lms2.view.*;
 
 public class BorrowerController implements BorrowerView.Delegate {
 	
-	BorrowerView view;
-	AppMenu appMenu;
-	LibraryBranchService branchService;
-	BookService bookService;
-	BookLoanService loanService;
-	BorrowerService borrowerService;
+	private BorrowerView view;
+	private AppMenu appMenu;
+	private final LibraryBranchService branchService = LibraryBranchService.getService();
+	private final BookService bookService = BookService.getService();
+	private final BookLoanService loanService = BookLoanService.getService();
+	private final BorrowerService borrowerService = BorrowerService.getService();
+	
+	public BorrowerController(BorrowerView view, AppMenu appMenu) {
+		this.view = view;
+		this.appMenu = appMenu;
+	}
 	
 	
 	@Override

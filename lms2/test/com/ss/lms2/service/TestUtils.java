@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import com.ss.lms2.db.Db;
 
-class TestUtils {
+public class TestUtils {
 
 	//Deletes all rows in the db before populating
 	public static void populateTestDb() throws SQLException {
@@ -22,8 +22,8 @@ class TestUtils {
 				+ "(3, 'pat inc', '1 pat street', '333-333-3333')";
 		
 		String branchesSql = "INSERT INTO library.tbl_library_branch " 
-				+ "VALUES (1, 'chi branch', '1 street'),"
-				+ "(2, 'la branch', '1 street'),"
+				+ "VALUES (1, 'chi branch', '1 chi street'),"
+				+ "(2, 'la branch', '1 la street'),"
 				+ "(3, 'dc branch', '1 dc ave')," 
 				+ "(4, 'miami branch', '1 miami ave'),"
 				+ "(5, 'nyc branch', '1 nyc ave')";
