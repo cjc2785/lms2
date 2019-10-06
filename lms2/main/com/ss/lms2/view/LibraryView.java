@@ -31,7 +31,7 @@ public class LibraryView {
 	//LIB1
 	public void showIntro() {
 		
-		String display = "1) Enter branch you manage\n" +
+		String display = "1) Enter the branch you manage\n" +
 				"2) Quit to previous";
 		
 		System.out.println(display);
@@ -39,11 +39,12 @@ public class LibraryView {
 		int num = View.nextInt();
 		
 		switch(num) {
-		case 0:
+		case 1:
 			delegate.onChooseToEnterBranch();
 			break;
-		case 1:
+		case 2:
 			delegate.onIntroQuit();	
+			break;
 		}
 	}
 	
@@ -54,7 +55,7 @@ public class LibraryView {
 		String branchText = getBranchListDisplay(branches);
 		
 	
-		System.out.println(branchText);
+		System.out.print(branchText);
 		System.out.println(size + 1 + ") Quit to previous");
 		System.out.println("Enter your branch:");
 		
@@ -73,8 +74,8 @@ public class LibraryView {
 	//LIB3
 	public void showBranchMenu(LibraryBranch branch) {
 		
-		String display = "1) Update the details of the Library\n" +
-				"2) Add copies of Book to the Branch\n" +
+		String display = "1) Update the details of the library\n" +
+				"2) Add copies of a book to the branch\n" +
 				"3) Quit to previous\n";
 		
 		System.out.println(display);
@@ -96,9 +97,9 @@ public class LibraryView {
 	
 	public void showUpdate(LibraryBranch branch) {
 		
-		System.out.println("You have chose to update the Branch " + 
-				"with Branch Id: " + branch.getBranchId() + " and Branch " +
-				"Name: " + branch.getBranchName());
+		System.out.println("You have chose to update the branch " + 
+				"with branch id: " + branch.getBranchId() + " and branch " +
+				"name: " + branch.getBranchName());
 		
 		System.out.println("Enter 'quit' at any prompt to cancel the operation");
 	
@@ -115,6 +116,10 @@ public class LibraryView {
 			showBranchMenu(branch);
 			return;
 		}
+		
+
+		System.out.println("Please enter a new branch address or enter " + 
+				"N/A for no change:");
 		
 		String newAddress = View.nextLine();
 		
@@ -140,9 +145,9 @@ public class LibraryView {
 		int size = books.size();
 		String listText = getBookListDisplay(books);
 		
-		System.out.println("Pick the branch you want to return a book to:\n");
-		System.out.println(listText);
-		System.out.println(size + 1 + ") Quit to previous");
+		System.out.println("Pick the book you want to add copies of to your branch:\n");
+		System.out.print(listText);
+		System.out.println(size + 1 + ") Quit to cancel operation");
 		
 		int index = View.nextInt() - 1;
 		
@@ -169,7 +174,7 @@ public class LibraryView {
 		
 		//Restart the prompt if the user enters invalid number of copies
 		if(newNoOfCopies < currentNoCopies) {
-			System.out.print("Number of copies must be greater than old number, ");
+			System.out.print("Number of copies must be at least the existing number, ");
 			System.out.println("Please Try again");
 			showEnterNumberOfCopies(currentCopies);
 			return;
@@ -194,7 +199,7 @@ public class LibraryView {
 			String name = branch.getBranchName();
 			String address = branch.getBranchAddress();
 			
-			branchText += i + 1 + ") " + name + ", " + address; 
+			branchText += i + 1 + ") " + name + ", " + address + "\n"; 
 		}
 		return branchText;
 	}
@@ -204,13 +209,13 @@ public class LibraryView {
 		int size = books.size();
 		String bookText = "";
 		
-		for(int i = 0; i <= size; ++i) {
+		for(int i = 0; i < size; ++i) {
 			
 			Book book = books.get(i);
 			String title = book.getTitle();
 			String authorName = book.getAuthor().getAuthorName();
 			
-			bookText += i + 1 + ") " + title + " by " + authorName; 
+			bookText += i + 1 + ") " + title + " by " + authorName + "\n"; 
 		}
 		
 		return bookText;

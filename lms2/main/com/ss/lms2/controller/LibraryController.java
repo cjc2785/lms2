@@ -10,12 +10,17 @@ import com.ss.lms2.view.*;
 
 public class LibraryController implements LibraryView.Delegate {
 	
-	LibraryView view;
-	AppMenu appMenu;
-	LibraryBranchService branchService;
-	BookService bookService;
-	BookCopiesService copiesService;
+	private LibraryView view;
+	private AppMenu appMenu;
+	private final LibraryBranchService branchService = LibraryBranchService.getService();
+	private final BookService bookService = BookService.getService();
+	private final BookCopiesService copiesService = BookCopiesService.getService();
 
+	public LibraryController(LibraryView view, AppMenu appMenu) {
+		this.view = view;
+		this.appMenu = appMenu;
+	}
+	
 	@Override
 	public void onChooseToEnterBranch() {
 		
@@ -55,7 +60,7 @@ public class LibraryController implements LibraryView.Delegate {
 	public void onUpdate(BookCopies copies) {
 		try {
 			copiesService.update(copies);
-			view.showUpdate(copies.getBranch());
+			view.showUpdateSuccess(copies.getBranch());
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

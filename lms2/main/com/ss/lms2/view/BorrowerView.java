@@ -63,6 +63,7 @@ public class BorrowerView {
 			break;
 		case 3:
 			delegate.onMainQuit();
+			break;
 		}
 	}
 
@@ -72,8 +73,10 @@ public class BorrowerView {
 		int size = branches.size();
 		String branchText = getBranchListDisplay(branches);
 		
-		String display = "Pick the branch you want to check out from:\n" + branchText;
-		System.out.println(display);
+
+		System.out.println("Pick the branch you want to check out from:");
+		System.out.print(branchText);
+		System.out.println(size + 1 + ") Quit to previous");
 		
 		int index = View.nextInt() - 1;
 		
@@ -93,7 +96,8 @@ public class BorrowerView {
 		String bookText = getBookListDisplay(books);
 		
 		System.out.println("Pick the book you want to check out");
-		System.out.println(bookText);
+		System.out.print(bookText);
+		System.out.println(size + 1 + ") Quit to cancel operation");
 		
 		int index = View.nextInt() - 1;
 		
@@ -121,7 +125,7 @@ public class BorrowerView {
 		String branchText = getBranchListDisplay(branches);
 		
 		System.out.println("Pick the branch you want to return a book to:\n");
-		System.out.println(branchText);
+		System.out.print(branchText);
 		System.out.println(size + 1 + ") Quit to previous");
 		
 		int index = View.nextInt() - 1;
@@ -146,7 +150,7 @@ public class BorrowerView {
 		String bookText = getBookListDisplay(books);
 		
 		System.out.println("Pick the book you want to return");
-		System.out.println(bookText);
+		System.out.print(bookText);
 		System.out.println(size + 1 + ") Quit to cancel operation");
 		
 		int index = View.nextInt() - 1;
@@ -174,7 +178,7 @@ public class BorrowerView {
 			String name = branch.getBranchName();
 			String address = branch.getBranchAddress();
 			
-			branchText += i + 1 + ") " + name + ", " + address; 
+			branchText += i + 1 + ") " + name + ", " + address + "\n"; 
 		}
 		return branchText;
 	}
@@ -184,13 +188,13 @@ public class BorrowerView {
 		int size = books.size();
 		String bookText = "";
 		
-		for(int i = 0; i <= size; ++i) {
+		for(int i = 0; i < size; ++i) {
 			
 			Book book = books.get(i);
 			String title = book.getTitle();
 			String authorName = book.getAuthor().getAuthorName();
 			
-			bookText += i + 1 + ") " + title + " by " + authorName; 
+			bookText += i + 1 + ") " + title + " by " + authorName + "\n"; 
 		}
 		
 		return bookText;
