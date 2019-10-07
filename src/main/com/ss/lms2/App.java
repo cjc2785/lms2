@@ -1,4 +1,4 @@
-package main;
+package com.ss.lms2;
 
 import com.ss.lms2.view.*;
 
