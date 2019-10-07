@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -41,8 +42,8 @@ public class Db {
 		
 		final String host = "localhost";
 		final String user = "lmsapp";
-		final String password = "lmspassword";
-		final String db = "lms";
+		final String password = "1lmspassword";
+		final String db = "library";
 
 		String connectionString = "jdbc:mysql://" + 
 				host + 
@@ -87,6 +88,20 @@ public class Db {
 			throws SQLException {
 
 		return withQuery(sql, mapper, p -> {});
+	}
+	
+	/* 
+	 * Returns an Optional of the 1st fetched result or Optional.empty if 
+	 * there were 0 fetched rows
+	 */
+	public <T> Optional<T> withQueryOne(
+			String sql, 
+			Function<TableRow, T> mapper,
+			Consumer<QueryParameterList> injector)
+		throws SQLException {
+		
+		List<T> result = withQuery(sql, mapper, injector);
+		return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
 	}
 
 	/*

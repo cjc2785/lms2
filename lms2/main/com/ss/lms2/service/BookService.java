@@ -13,8 +13,23 @@ public class BookService {
 
 	private BookDao bookDao;
 	
+	private static BookService service = new BookService(
+			BookDao.getDao()
+			);
+	
+	public static BookService getService() {
+		return service;
+	}
+	
+	private BookService(BookDao bookDao) {
+		this.bookDao = bookDao;
+	}
 
 	public List<Book> getAll() throws SQLException {
 		return bookDao.getAll();
+	}
+	
+	public List<Book> getAvailable(LibraryBranch branch) throws SQLException {
+		return bookDao.getAvailable(branch);
 	}
 }
