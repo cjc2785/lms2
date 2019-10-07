@@ -1,6 +1,7 @@
 package com.ss.lms2.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import com.ss.lms2.dao.*;
@@ -21,8 +22,24 @@ public class BorrowerService {
 	private BorrowerService(BorrowerDao borrowerDao) {
 		this.borrowerDao = borrowerDao;
 	}
+	
+	public void delete(Borrower borrower) throws SQLException {
+		borrowerDao.delete(borrower);
+	}
+	
+	public void insert(Borrower borrower) throws SQLException {
+		borrowerDao.insert(borrower);
+	}
+	
+	public void update(Borrower borrower) throws SQLException {
+		borrowerDao.update(borrower);
+	}
 
 	public Optional<Borrower> get(int cardNo) throws SQLException {
 		return borrowerDao.get(cardNo);
+	}
+	
+	public List<Borrower> getAll() throws SQLException {
+		return borrowerDao.getAll();
 	}
 }

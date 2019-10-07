@@ -68,17 +68,19 @@ public class BorrowerDao {
 		});
 	}
 	
-	public void update(LibraryBranch branch) throws SQLException {
+	public void update(Borrower borrower) throws SQLException {
 		
-		String query = "UPDATE library.tbl_library_branch SET " + 
-				"branchName=?, " +
-				"branchAddress=? " +
-				"WHERE branchId=?";
+		String query = "UPDATE library.tbl_library_borrower SET " + 
+				"Name=?, " +
+				"Address=? " +
+				 "Phone=?" +
+				"WHERE cardNo=?";
 		
 		db.withUpdate(query, parameterList -> {
-			parameterList.setString(1, branch.getBranchName());
-			parameterList.setString(2, branch.getBranchAddress());
-			parameterList.setInt(3, branch.getBranchId());
+			parameterList.setString(1, borrower.getName());
+			parameterList.setString(2, borrower.getAddress());
+			parameterList.setString(3, borrower.getPhone());
+			parameterList.setInt(4, borrower.getCardNo());
 		});
 	}
 	

@@ -49,7 +49,7 @@ public class AdminView {
 		
 		int num = View.nextInt();
 		
-	//Admin CRDU Menu
+	//Admin CRUD Menu
 		switch(num) {
 		case 0:
 			delegate.crudBookAuthor();

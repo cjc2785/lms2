@@ -37,6 +37,12 @@ public class BookLoanService {
 		
 		return loanDao.get(borrower, branch, book);
 	}
+
+	//Loan Update
+	public void updateLoan(BookLoan loan) throws SQLException {
+		loanDao.update(loan);
+	
+	}
 	
 	//Also decrements the noOfCopies 
 	//Idempotent (Will do nothing if the loan already exists)

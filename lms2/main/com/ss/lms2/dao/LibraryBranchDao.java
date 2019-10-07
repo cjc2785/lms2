@@ -50,7 +50,6 @@ public class LibraryBranchDao {
 				});
 	}
 
-
 	
 	public void delete(LibraryBranch branch) throws SQLException {
 		
@@ -74,7 +73,6 @@ public class LibraryBranchDao {
 			parameterList.setString(3, branch.getBranchAddress());
 		});
 	}
-
 
 	public void update(LibraryBranch branch) throws SQLException {
 
