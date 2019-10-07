@@ -117,7 +117,7 @@ public class BookLoanDao {
 			parameterList.setInt(3, loan.getBorrower().getCardNo());;
 		});
 	}
-	
+
 	public void update(BookLoan bookLoan) throws SQLException {
 		
 		String query = "UPDATE library.tbl_book_loan SET " + 
@@ -132,6 +132,7 @@ public class BookLoanDao {
 			parameterList.setInt(5, bookLoan.getBorrower().getCardNo());
 		});
 	}
+
 
 	private BookLoan rowToLoans(Borrower borrower, TableRow row) {
 
@@ -162,7 +163,6 @@ public class BookLoanDao {
 				publisherPhone);
 
 		Book book = new Book(bookId, title, author, publisher);
-
 		LibraryBranch branch = new LibraryBranch(branchId, branchName, branchAddress);
 
 		BookLoan loan = new BookLoan(book, branch, borrower, dateOut, dueDate);
