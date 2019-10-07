@@ -42,8 +42,8 @@ public class Db {
 		
 		final String host = "localhost";
 		final String user = "lmsapp";
-		final String password = "1lmspassword";
-		final String db = "library";
+		final String password = "lmspassword";
+		final String db = "lms";
 
 		String connectionString = "jdbc:mysql://" + 
 				host + 

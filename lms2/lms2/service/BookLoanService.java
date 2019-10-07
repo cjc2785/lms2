@@ -37,27 +37,11 @@ public class BookLoanService {
 		
 		return loanDao.get(borrower, branch, book);
 	}
-
-	//Loan Update
-	public void updateDueDate(BookLoan loan) throws SQLException {
-		loanDao.updateDueDate(loan);
-	
-	}
 	
 	//Also decrements the noOfCopies 
-	//Idempotent (Will do nothing if the loan already exists)
+	//Will decrement even if the loan exists
 	//Don't call if there are no copies of the book in the library
 	public void insertLoan(BookLoan loan) throws SQLException {
-		
-		
-		Optional<BookLoan> existing = loanDao.get(
-				loan.getBorrower(), loan.getBranch(), loan.getBook()
-				);
-		
-		//Do nothing if the loan exists
-		if(existing.isPresent()) {
-			return;
-		}
 		
 		BookCopies copies = copiesDao.get(loan.getBranch(), loan.getBook()).get();
 		
@@ -69,18 +53,10 @@ public class BookLoanService {
 	}
 	
 	//Also increments the noOfCopies 
-	//Idempotent (Will do nothing if the loan already exists)
+	//Will increment even if the loan does not exist
 	//Don't call if there were never any copies of the book in the library
 	public void deleteLoan(BookLoan loan) throws SQLException {
 		
-		Optional<BookLoan> existing = loanDao.get(
-				loan.getBorrower(), loan.getBranch(), loan.getBook()
-				);
-		
-		//Do nothing if the loan does not exist
-		if(existing.isEmpty()) {
-			return;
-		}
 		BookCopies copies = copiesDao.get(loan.getBranch(), loan.getBook()).get();
 		
 		//increment the noOfCopies

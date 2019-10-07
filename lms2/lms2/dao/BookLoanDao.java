@@ -46,7 +46,6 @@ public class BookLoanDao {
 				});
 	}
 
-	//Get all loans by the borrower at the branch
 	public List<BookLoan> getByBorrower(Borrower borrower, LibraryBranch branch)
 			throws SQLException {
 
@@ -89,7 +88,7 @@ public class BookLoanDao {
 				});
 	}
 
-	//Will fail if the loan already exists
+	//Only updates the dateOut & dateIn
 	public void insert(BookLoan loan) throws SQLException {
 
 		String query = "INSERT INTO library.tbl_book_loans " + 
@@ -115,20 +114,6 @@ public class BookLoanDao {
 			parameterList.setInt(1, loan.getBook().getBookId());
 			parameterList.setInt(2, loan.getBranch().getBranchId());
 			parameterList.setInt(3, loan.getBorrower().getCardNo());;
-		});
-	}
-	
-	public void updateDueDate(BookLoan bookLoan) throws SQLException {
-		
-		String query = "UPDATE library.tbl_book_loan SET " + 
-				"dueDate=? " +
-				"WHERE bookId=? AND branchId=? AND cardNo=?";
-		
-		db.withUpdate(query, parameterList -> {
-			parameterList.setDate(1, bookLoan.getDueDate());
-			parameterList.setInt(2, bookLoan.getBook().getBookId());
-			parameterList.setInt(3, bookLoan.getBranch().getBranchId());
-			parameterList.setInt(4, bookLoan.getBorrower().getCardNo());
 		});
 	}
 
@@ -161,6 +146,8 @@ public class BookLoanDao {
 				publisherPhone);
 
 		Book book = new Book(bookId, title, author, publisher);
+
+
 
 		LibraryBranch branch = new LibraryBranch(branchId, branchName, branchAddress);
 
