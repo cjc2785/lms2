@@ -46,14 +46,6 @@ public class LibraryBranchService {
 		return branchDao.get(branchId);
 	}
 	
-	public void delete(LibraryBranch branch) throws SQLException {
-		branchDao.delete(branch);
-	}
-	
-	public void insert(LibraryBranch branch) throws SQLException {
-		branchDao.insert(branch);
-	}
-	
 	public void update(LibraryBranch branch) throws SQLException {
 		branchDao.update(branch);
 	}
