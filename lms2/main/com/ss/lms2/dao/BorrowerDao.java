@@ -39,6 +39,35 @@ public class BorrowerDao {
 				Optional.of(borrowers.get(0));
 	}
 	
+	public List<Borrower> getAll() throws SQLException{
+		String query = "SELECT * FROM library.tbl_borrower ";
+				
+			return db.withQuery(query, this::rowToBorrower);
+	}
+	
+	public void delete(Borrower borrower) throws SQLException {
+		
+		String query = "DELETE FROM library.tbl_borrower " + 
+				"WHERE cardNo=?";
+		
+		db.withUpdate(query, parameterList -> {
+			parameterList.setInt(1, borrower.getCardNo());
+		});
+	}
+	
+	public void insert(Borrower borrower) throws SQLException {
+		
+		String query = "INSERT INTO library.tbl_borrower VALUES " + 
+				"(?,?,?,?) ";
+		
+		db.withUpdate(query, parameterList -> {
+			parameterList.setInt(1, borrower.getCardNo());
+			parameterList.setString(2, borrower.getName());
+			parameterList.setString(3, borrower.getAddress());
+			parameterList.setString(4, borrower.getPhone());
+		});
+	}
+	
 	public void update(LibraryBranch branch) throws SQLException {
 		
 		String query = "UPDATE library.tbl_library_branch SET " + 

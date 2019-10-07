@@ -51,6 +51,31 @@ public class LibraryBranchDao {
 	}
 
 
+	
+	public void delete(LibraryBranch branch) throws SQLException {
+		
+		String query = "DELETE FROM library.tbl_library_branch " + 
+				"WHERE branchId=?";
+		
+		db.withUpdate(query, parameterList -> {
+			parameterList.setInt(1, branch.getBranchId());
+		});
+	}
+	
+	
+	public void insert(LibraryBranch branch) throws SQLException {
+		
+		String query = "INSERT INTO library.tbl_library_branch VALUES " + 
+				"(?,?,?) ";
+		
+		db.withUpdate(query, parameterList -> {
+			parameterList.setInt(1, branch.getBranchId());
+			parameterList.setString(2, branch.getBranchName());
+			parameterList.setString(3, branch.getBranchAddress());
+		});
+	}
+
+
 	public void update(LibraryBranch branch) throws SQLException {
 
 		String query = "UPDATE library.tbl_library_branch SET " + 

@@ -118,6 +118,22 @@ public class BookLoanDao {
 		});
 	}
 
+	public void update(BookLoan bookLoan) throws SQLException {
+		
+		String query = "UPDATE library.tbl_book_loan SET " + 
+				"dateOut=? , dueDate=? " +
+				"WHERE bookId=? AND branchId=? AND cardNo=?";
+		
+		db.withUpdate(query, parameterList -> {
+			parameterList.setDate(1, bookLoan.getDateOut());
+			parameterList.setDate(2, bookLoan.getDueDate());
+			parameterList.setInt(3, bookLoan.getBook().getBookId());
+			parameterList.setInt(4, bookLoan.getBranch().getBranchId());
+			parameterList.setInt(5, bookLoan.getBorrower().getCardNo());
+		});
+	}
+
+
 	private BookLoan rowToLoans(Borrower borrower, TableRow row) {
 
 		LocalDate dateOut = row.getDate("dateOut");
@@ -147,9 +163,6 @@ public class BookLoanDao {
 				publisherPhone);
 
 		Book book = new Book(bookId, title, author, publisher);
-
-
-
 		LibraryBranch branch = new LibraryBranch(branchId, branchName, branchAddress);
 
 		BookLoan loan = new BookLoan(book, branch, borrower, dateOut, dueDate);
