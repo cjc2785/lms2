@@ -39,8 +39,8 @@ public class BookLoanService {
 	}
 
 	//Loan Update
-	public void updateLoan(BookLoan loan) throws SQLException {
-		loanDao.update(loan);
+	public void updateDueDate(BookLoan loan) throws SQLException {
+		loanDao.updateDueDate(loan);
 	
 	}
 	

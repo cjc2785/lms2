@@ -63,7 +63,7 @@ public class AuthorDao {
 	public void update(Author author) throws SQLException {
 		
 		String query = "UPDATE library.tbl_author SET " + 
-				"authorName=?, " +
+				"authorName=? " +
 				"WHERE authorId=?";
 		
 		db.withUpdate(query, parameterList -> {

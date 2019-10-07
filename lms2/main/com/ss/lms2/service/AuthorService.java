@@ -3,6 +3,7 @@ package com.ss.lms2.service;
 import java.sql.SQLException;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.ss.lms2.dao.*;
 import com.ss.lms2.pojo.*;
@@ -15,6 +16,10 @@ public class AuthorService {
 	private static AuthorService service = new AuthorService(
 			AuthorDao.getDao()
 			);
+	
+	public Optional<Author> get(int authorId) throws SQLException {
+		return authorDao.get(authorId);
+	}
 	
 	public static AuthorService getService() {
 		return service;

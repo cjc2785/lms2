@@ -15,7 +15,7 @@ public class App {
 
 		LibraryView libraryView = new LibraryView();
 		BorrowerView borrowerView = new BorrowerView();
-
+		AdminView adminView = new AdminView();
 
 		LibraryController libraryController = new LibraryController(
 				libraryView, appMenu);
@@ -23,13 +23,17 @@ public class App {
 		BorrowerController borrowerController = new BorrowerController(
 				borrowerView, appMenu);
 		
+		AdminController adminController = new AdminController(
+				adminView, appMenu);
 		
 		libraryView.setDelegate(libraryController);
 		borrowerView.setDelegate(borrowerController);
+		adminView.setDelegate(adminController);
 		
 		//Use this to setup the test db
 		//TestUtils.populateTestDb();
 	
-		appMenu.show();
+		//appMenu.show();
+		adminView.showIntro();
 	}
 }
